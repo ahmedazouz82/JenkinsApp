@@ -1,0 +1,73 @@
+﻿@page
+@model Archiver.Pages.FolderTypes.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                انواع الملفات
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+                <li><a href="FolderTypes" class="dropdown-item">الكل</a></li>
+                <hr />
+
+                @foreach (var item in Model.listtypenameDDL)
+                {
+                    <li><a href="FolderTypes?TypeGenreString=@Html.DisplayFor(modelItem => item.Text)" class="dropdown-item" asp-for="TypeGenreString">@Html.DisplayFor(modelItem => item.Text)</a></li>
+                }
+            </ul>
+
+        </div>
+        <input type="text" asp-for="SearchString" class="form-control" aria-label="Text input with segmented dropdown button">
+        <input type="submit" class="btn btn-outline-secondary" value="تصفيه">
+    </div>
+
+    <select asp-for="TypeGenreString" asp-items="Model.listtypenameDDL" class="form-select form-select-sm" aria-label=".form-select-sm example">
+        <option value="" class="dropdown-item">الكل</option>
+    </select>
+
+
+</form>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DocFoldersType[0].TypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DocFoldersType[0].TypeGenre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.DocFoldersType)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeGenre)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

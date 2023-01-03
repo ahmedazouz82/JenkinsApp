@@ -1,0 +1,22 @@
+﻿@page
+@model Archiver.Pages.Account.LoginModel
+@{
+}
+
+<form method="post">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" asp-for="Credential.UserName">
+        <label for="floatingInput" asp-for="Credential.UserName">اسم المستخدم</label>
+        <span class="text-danger" asp-validation-for="Credential.UserName"></span>
+    </div>
+
+    <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" asp-for="Credential.UserPassword">
+        <label for="floatingPassword" asp-for="Credential.UserPassword">كلمة المرور</label>
+        <span class="text-danger" asp-validation-for="Credential.UserPassword"></span>
+    </div>
+    <br />
+    <input type="submit" value="دخول" class="btn btn-primary">
+</form>
